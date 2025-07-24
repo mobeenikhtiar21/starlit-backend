@@ -42,7 +42,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  imageUrl: string;
+  imageUrl: Text;
   category: 'apparel' | 'lighthouse' | 'care-package';
   inStock: boolean;
 }
