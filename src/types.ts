@@ -50,9 +50,17 @@ export interface Product {
 export interface Donation {
   id: string;
   amount: number;
-  programId?: string;
-  donorName: string;
+  yourImpact?: string;
+  paymentMethod: 'paypal' | 'card';
+
+  cardNumber?: string;
+  expiryDate?: string;
+  cvc?: string;
+  cardholderName?: string;
+
+  firstName: string;
+  lastName: string;
+  email: string;
   message?: string;
   date: string;
-  paymentMethod: 'paypal' | 'card';
 } 
