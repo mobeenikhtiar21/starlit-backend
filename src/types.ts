@@ -2,7 +2,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'donor' | 'volunteer' | 'staff' | 'beneficiary';
+  role: 'donor' | 'volunteer' | 'staff' | 'beneficiary' | 'admin';
   profile?: UserProfile;
 }
 
