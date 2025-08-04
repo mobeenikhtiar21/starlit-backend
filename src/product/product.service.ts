@@ -8,16 +8,14 @@ export class ProductService {
   private supabase = createSupabaseClient();
 
   async getAllProducts() {
-    const { data, error } = await this.supabase
-      .from('products')
-      .select('*');
+    const { data, error } = await this.supabase.from('products').select('*');
     if (error) {
       throw new Error(error.message);
     }
     return data;
   }
 
-  async createProduct(product: Product): Promise<Product>  {
+  async createProduct(product: Product): Promise<Product> {
     const { data, error } = await this.supabase
       .from('products')
       .insert([product])
@@ -29,4 +27,3 @@ export class ProductService {
     return data[0];
   }
 }
-

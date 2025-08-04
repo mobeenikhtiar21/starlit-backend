@@ -12,7 +12,15 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UserModule, UserProfileModule, ProgramModule, JobModule, ProductModule, DonationModule],
+  imports: [
+    ConfigModule.forRoot(),
+    UserModule,
+    UserProfileModule,
+    ProgramModule,
+    JobModule,
+    ProductModule,
+    DonationModule,
+  ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
 })

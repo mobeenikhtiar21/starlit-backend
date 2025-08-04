@@ -47,20 +47,12 @@ export interface Product {
   inStock: boolean;
 }
 
-export interface Donation {
-  id: string;
+export interface CreateDonationDto {
   amount: number;
-  yourImpact?: string;
-  paymentMethod: 'paypal' | 'card';
-
-  cardNumber?: string;
-  expiryDate?: string;
-  cvc?: string;
-  cardholderName?: string;
-
+  email: string;
   firstName: string;
   lastName: string;
-  email: string;
+  program: string;
+  donationType: 'one-time' | 'monthly';
   message?: string;
-  date: string;
-} 
+}

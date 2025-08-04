@@ -6,4 +6,4 @@ export function createSupabaseClient() {
   return createClient(supabaseUrl, supabaseKey);
 }
 
-export const supabase = createSupabaseClient(); 
+export const supabase = createSupabaseClient();

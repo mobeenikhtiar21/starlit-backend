@@ -4,6 +4,6 @@ import { UserProfileController } from './user-profile.controller';
 
 @Module({
   providers: [UserProfileService],
-  controllers: [UserProfileController]
+  controllers: [UserProfileController],
 })
 export class UserProfileModule {}

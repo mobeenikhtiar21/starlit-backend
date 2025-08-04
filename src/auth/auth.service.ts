@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { supabase } from '../supabaseClient';
@@ -17,22 +16,39 @@ export class AuthService {
       .eq('email', email)
       .single();
 
-    if (error || !user) return null;
+    if (error || !user) {
+      console.error('Supabase login error:', error);
+      return null;
+    }
+
+    if (password !== user.password) {
+      console.error('Password mismatch for user:', email);
+      return null;
+    }
 
     // Compare hashed password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return null;
+    // const isMatch = await bcrypt.compare(password, user.password);
+    // if (!isMatch) return null;
 
-    const token = jwt.sign({ sub: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1d' });
+    const token = jwt.sign(
+      { id: user.id, email: user.email, role: user.role},
+      JWT_SECRET,
+      { expiresIn: '1d' },
+    );
     return token;
   }
 
-  async register(data: { name: string; email: string; password: string; role?: string }): Promise<string> {
+  async register(data: {
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+  }): Promise<string> {
     // Hash password before saving
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+    // const hashedPassword = await bcrypt.hash(data.password, 10);
     const { data: user, error } = await supabase
       .from('users')
-      .insert([{ ...data, password: hashedPassword, role: data.role || 'donor' }])
+      .insert([{ ...data, role: data.role || 'donor' }])
       .select()
       .single();
 
@@ -41,7 +57,11 @@ export class AuthService {
       throw new Error('Registration failed');
     }
 
-    const token = jwt.sign({ sub: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1d' });
+    const token = jwt.sign(
+      { sub: user.id, email: user.email, role: user.role },
+      JWT_SECRET,
+      { expiresIn: '1d' },
+    );
     return token;
   }
 
@@ -58,4 +78,4 @@ export class AuthService {
   async logout() {
     // Optionally: redirect to login
   }
-} 
+}
