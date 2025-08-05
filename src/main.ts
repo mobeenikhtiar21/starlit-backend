@@ -12,8 +12,10 @@ async function bootstrap() {
     const allowedOrigins = [
       'http://localhost:5173',
       'http://192.168.0.108:5173', // 👈 mobile device access
+      'https://your-frontend-domain.com', // Add your production frontend URL
     ];
 
+    // Allow requests with no origin (mobile apps, etc.)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -29,7 +31,9 @@ async function bootstrap() {
 
 
   app.use('/donation/webhook', bodyParser.raw({ type: 'application/json' }));
-  await app.listen(3000);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log(`Application is running on port: ${port}`);
 }
 bootstrap();
