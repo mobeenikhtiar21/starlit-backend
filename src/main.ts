@@ -12,7 +12,8 @@ async function bootstrap() {
     const allowedOrigins = [
       'http://localhost:5173',
       'http://192.168.0.108:5173', // 👈 mobile device access
-      'https://your-frontend-domain.com', // Add your production frontend URL
+      // allow all origins for production
+      '*',
     ];
 
     // Allow requests with no origin (mobile apps, etc.)
