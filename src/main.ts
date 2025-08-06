@@ -12,6 +12,7 @@ async function bootstrap() {
     const allowedOrigins = [
       'http://localhost:5173',
       'http://192.168.0.108:5173', // 👈 mobile device access
+      'https://starlit-frontend.vercel.app', // Production frontend URL
       // allow all origins for production
       '*',
     ];
